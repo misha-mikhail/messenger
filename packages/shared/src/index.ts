@@ -1,3 +1,1 @@
-const meaningOfLife = 42;
-
-export default meaningOfLife;
+export { default as User } from './entities/User';

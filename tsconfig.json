@@ -1,8 +1,9 @@
 {
     "extends": "./tsconfig.build.json",
     "compilerOptions": {
-        "baseUrl": ".",
+        "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
         "paths": {
             "@chat/*": [
                 "packages/*/src"
