@@ -1,0 +1,12 @@
+{
+    "extends": "./tsconfig.build.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "allowSyntheticDefaultImports": true,
+        "paths": {
+            "@chat/*": [
+                "packages/*/src"
+            ]
+        }
+    }
+}

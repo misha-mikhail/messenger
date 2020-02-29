@@ -1,0 +1,22 @@
+{
+    "name": "@chat/web",
+    "version": "1.0.0",
+    "main": "dist/index",
+    "types": "dist/index",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "start": "node ./dist/index.js",
+        "build": "npm run clean && npm run compile",
+        "clean": "rm -rf ./dist",
+        "compile": "tsc -p tsconfig.build.json",
+        "prepublishOnly": "npm run build"
+    },
+    "dependencies": {
+        "@chat/shared": "^1.0.0"
+    },
+    "devDependencies": {
+        "typescript": "~3.4.5"
+    }
+}
