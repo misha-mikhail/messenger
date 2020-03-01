@@ -16,9 +16,11 @@
     "dependencies": {
         "@chat/shared": "^1.0.0",
         "@types/node": "^13.7.7",
-        "fastify": "^2.12.1"
+        "fastify": "^2.12.1",
+        "mongodb": "^3.5.4"
     },
     "devDependencies": {
+        "typeorm": "^0.2.24",
         "typescript": "~3.4.5"
     }
 }
