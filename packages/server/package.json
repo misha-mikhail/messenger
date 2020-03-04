@@ -7,9 +7,10 @@
         "dist"
     ],
     "scripts": {
-        "start": "node ./dist/index.js",
+        "bs": "npm run build && npm run start",
+        "start": "node dist",
         "build": "npm run clean && npm run compile",
-        "clean": "rm -rf ./dist",
+        "clean": "rimraf dist",
         "compile": "tsc -p tsconfig.build.json",
         "prepublishOnly": "npm run build"
     },
@@ -17,10 +18,11 @@
         "@chat/shared": "^1.0.0",
         "@types/node": "^13.7.7",
         "fastify": "^2.12.1",
+        "typeorm": "^0.2.24",
         "mongodb": "^3.5.4"
     },
     "devDependencies": {
-        "typeorm": "^0.2.24",
+        "rimraf": "^3.0.2",
         "typescript": "~3.4.5"
     }
 }

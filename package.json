@@ -2,6 +2,7 @@
     "name": "lerna-ts",
     "private": true,
     "scripts": {
+        "setup": "npm install && npm run bootstrap",
         "bootstrap": "lerna bootstrap --hoist",
         "clean": "lerna run clean",
         "build": "lerna run build",
@@ -10,5 +11,8 @@
     "devDependencies": {
         "lerna": "~3.14.0",
         "typescript": "~3.4.5"
+    },
+    "dependencies": {
+        "reflect-metadata": "^0.1.13"
     }
 }
