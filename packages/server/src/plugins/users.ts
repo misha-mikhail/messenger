@@ -4,10 +4,10 @@ import { getCustomRepository } from 'typeorm';
 import UserRepository from '../services/user-repository';
 import GetUsersQuery from '../endpoint-queries/get-users-query';
 
-server.get('/users/get', async function (request, reply) {
+server.get<GetUsersQuery>('/users/get', async function (request, reply) {
     const repo = getCustomRepository(UserRepository);
 
-    const { username } = request.query as GetUsersQuery;
+    const { username } = request.query;
 
     if (!username) {
         reply.code(400).send({
