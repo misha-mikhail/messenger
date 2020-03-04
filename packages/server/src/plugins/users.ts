@@ -1,5 +1,5 @@
 import server from '../server';
-import { User } from '@chat/shared';
+import { IUser, User } from '@chat/shared';
 import { getConnection } from 'typeorm';
 
 server.get('/users/get', async function (request, reply) {
@@ -10,15 +10,12 @@ server.get('/users/get', async function (request, reply) {
     reply.send(allUsers);
 });
 
-server.get('/users/make-test-single', async function (request, reply) {
-    const repo = getConnection().getRepository(User);
+server.patch('/users/edit-bio', function (request, reply) {
+    const user: IUser = {
+        Username: 'some-username',
+        Bio: 'This is the edited bio !',
+    };
 
-    const user = new User();
-    Object.assign(user, {
-        Bio: 'safasf',
-        Username: 'asfas',
-    })
-    await repo.save(user);
-
-    reply.send({user});
+    reply.send(user);
 });
+

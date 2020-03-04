@@ -3,6 +3,9 @@ import startup from './startup';
 import { getConnection } from 'typeorm';
 
 require('./plugins/users');
+require('./plugins/messages');
+require('./plugins/contacts');
+require('./plugins/auth');
 
 (async () => {
     await startup();
