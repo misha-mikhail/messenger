@@ -1,7 +1,7 @@
 import server from '../server';
 //import { Message } from '@chat/shared';
 
-server.get('/messages/get', function(request, reply){
+server.get('/messages/get', function(request, reply) {
     const message = {
         Text: 'Lolka'
     };
@@ -9,7 +9,7 @@ server.get('/messages/get', function(request, reply){
     reply.send(message);
 });
 
-server.post('/messages/send', function(request, reply){
+server.post('/messages/send', function(request, reply) {
     const message = {
         Text: 'message sent'
     };

@@ -1,13 +1,24 @@
 import server from '../server';
-import { IUser, User } from '@chat/shared';
-import { getConnection } from 'typeorm';
+import { IUser } from '@chat/shared';
+import { getCustomRepository } from 'typeorm';
+import UserRepository from '../services/user-repository';
+import GetUsersQuery from '../endpoint-queries/get-users-query';
 
 server.get('/users/get', async function (request, reply) {
-    const repo = getConnection().getRepository(User);
+    const repo = getCustomRepository(UserRepository);
 
-    const allUsers = await repo.find();
+    const { username } = request.query as GetUsersQuery;
 
-    reply.send(allUsers);
+    if (!username) {
+        reply.code(400).send({
+            Error: [ 'username' ],
+        });
+        return;
+    }
+
+    const user = await repo.findByUsername(username);
+
+    user && reply.send(user) || reply.callNotFound();
 });
 
 server.patch('/users/edit-bio', function (request, reply) {
