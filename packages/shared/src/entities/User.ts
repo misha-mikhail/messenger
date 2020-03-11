@@ -1,4 +1,5 @@
 import {Entity, ObjectID, ObjectIdColumn, Column} from 'typeorm';
+import Message from './Message';
 
 export interface IUser {
     Username: string;
@@ -19,4 +20,10 @@ export default class User implements IUser {
 
     @Column()
     Bio?: string;
+
+    @Column()
+    SentMessages: Message[];
+
+    @Column()
+    ReceivedMessages: Message[];
 }
