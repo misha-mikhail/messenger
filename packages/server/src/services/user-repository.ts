@@ -4,13 +4,13 @@ import { User } from '@chat/shared';
 @EntityRepository(User)
 export default class UserRepository extends AbstractRepository<User> {
 
-    createNew(username: string, password: string) {
+    async createNew(username: string, password: string) {
         // TODO:
         // Создать конструктор для User, который примет Username и PasswordHash.
         // В этом методе захэшировать пароль. Передать его в конструктор.
         // Здесь всё сохранить.
 
-        this.repository.save(new User());
+        return await this.repository.save(new User(username, password));
     }
 
     findByUsername(username: string) {

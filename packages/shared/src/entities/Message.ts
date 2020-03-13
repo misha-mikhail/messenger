@@ -1,5 +1,6 @@
 import {Entity, ObjectID, ObjectIdColumn, Column, CreateDateColumn, ManyToOne} from 'typeorm';
 import User from './User';
+import Conversation from './Conversation';
 
 export interface IMessage {
     Text: string;
@@ -8,20 +9,20 @@ export interface IMessage {
 
 @Entity()
 export default class Message implements IMessage {
-    constructor(from: User, to: User, text: string) {
-        this.Sender = from;
-        this.Recipient = to;
+    constructor(sender: User, toConversation: Conversation, text: string) {
+        this.Sender = sender;
+        this.Conversation = toConversation;
         this.Text = text;
     }
 
     @ObjectIdColumn()
     Id: ObjectID;
 
-    @ManyToOne(type => User, user => user.SentMessages)
+    @ManyToOne(type => User)
     Sender: User;
 
-    @ManyToOne(type => User, user => user.ReceivedMessages)
-    Recipient: User;
+    @ManyToOne(type => Conversation, conversation => conversation.Messages)
+    Conversation: Conversation;
 
     @Column()
     Text: string;

@@ -1,7 +1,11 @@
-import {createConnection} from 'typeorm';
-import { User } from '@chat/shared';
+import { createConnection } from 'typeorm';
+import {
+    User,
+    Conversation,
+    Message,
+ } from '@chat/shared';
 
-export default async function() {
+export default async function initializeDatabaseConnection() {
     return await createConnection({
         type: 'mongodb',
         host: 'localhost',
@@ -9,6 +13,8 @@ export default async function() {
         database: 'chat',
         entities: [
             User,
+            Conversation,
+            Message,
         ]
     });
 }

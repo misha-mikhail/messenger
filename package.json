@@ -3,14 +3,14 @@
     "private": true,
     "scripts": {
         "setup": "npm install && npm run bootstrap",
-        "bootstrap": "lerna bootstrap --hoist",
+        "bootstrap": "lerna bootstrap",
         "clean": "lerna run clean",
         "build": "lerna run build",
         "pub": "lerna publish"
     },
     "devDependencies": {
         "lerna": "~3.14.0",
-        "typescript": "~3.4.5"
+        "typescript": "3.8.3"
     },
     "dependencies": {
         "reflect-metadata": "^0.1.13"

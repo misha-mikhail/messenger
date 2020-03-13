@@ -6,8 +6,14 @@
         "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
         "paths": {
-            "@chat/*": [
-                "packages/*/src"
+            "@chat/shared": [
+                "packages/shared/src"
+            ],
+            "@chat/server": [
+                "packages/server/src"
+            ],
+            "@chat/web": [
+                "packages/web/src"
             ]
         }
     }

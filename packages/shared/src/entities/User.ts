@@ -1,5 +1,6 @@
-import {Entity, ObjectID, ObjectIdColumn, Column} from 'typeorm';
+import {Entity, ObjectID, ObjectIdColumn, Column, ManyToOne, ManyToMany} from 'typeorm';
 import Message from './Message';
+import Conversation from './Conversation';
 
 export interface IUser {
     Username: string;
@@ -9,6 +10,11 @@ export interface IUser {
 
 @Entity()
 export default class User implements IUser {
+    constructor(username: string, password: string) {
+        this.Username = username;
+        this.PasswordHash = password; // TODO: Hashing.
+    }
+
     @ObjectIdColumn()
     Id: ObjectID;
 
@@ -21,9 +27,6 @@ export default class User implements IUser {
     @Column()
     Bio?: string;
 
-    @Column()
-    SentMessages: Message[];
-
-    @Column()
-    ReceivedMessages: Message[];
+    @ManyToMany(type => Conversation, c => c.Members)
+    Conversations: Conversation[];
 }
