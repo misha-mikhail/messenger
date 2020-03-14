@@ -1,20 +1,9 @@
-import { createConnection } from 'typeorm';
-import {
-    User,
-    Conversation,
-    Message,
- } from '@chat/shared';
+import * as mongoose from 'mongoose';
 
-export default async function initializeDatabaseConnection() {
-    return await createConnection({
-        type: 'mongodb',
-        host: 'localhost',
-        port: 27017,
-        database: 'chat',
-        entities: [
-            User,
-            Conversation,
-            Message,
-        ]
+export async function connectToDatabase() {
+    return await mongoose.connect('mongodb://localhost:27017/', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        dbName: 'chat',
     });
 }

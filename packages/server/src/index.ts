@@ -1,8 +1,7 @@
-import server from './server';
-import initializeDatabaseConnection from './database/connection';
-import { getConnection } from 'typeorm';
-
 import "reflect-metadata";
+
+import server from './server';
+import { connectToDatabase } from './database/connection';
 
 require('./plugins/users');
 require('./plugins/messages');
@@ -11,9 +10,8 @@ require('./plugins/auth');
 require('./plugins/test');
 
 (async () => {
-    await initializeDatabaseConnection();
+    const conn = await connectToDatabase();
 
-    const conn = getConnection();
     console.log({conn});
 
     server.listen(3000, function (err, address) {
