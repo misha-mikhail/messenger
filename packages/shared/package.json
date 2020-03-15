@@ -12,8 +12,7 @@
         "compile": "tsc -p tsconfig.build.json",
         "prepublishOnly": "npm run build"
     },
-    "dependencies": {
-    },
+    "dependencies": {},
     "devDependencies": {
         "rimraf": "^3.0.2",
         "typescript": "3.8.3"

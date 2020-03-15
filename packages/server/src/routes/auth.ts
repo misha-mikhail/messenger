@@ -1,16 +1,16 @@
 import { Context } from 'koa';
-import Route from '../types/route';
+import { Route, HttpMethod } from '../types/route';
 // import authService
 
 export const AuthRoutes: Route[] = [
     {
         path: '/auth/login',
-        method: 'POST',
+        method: HttpMethod.POST,
         action: login,
     },
     {
         path: '/auth/register',
-        method: 'POST',
+        method: HttpMethod.POST,
         action: register,
     },
 ];

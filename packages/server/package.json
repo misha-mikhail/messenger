@@ -9,7 +9,6 @@
     "scripts": {
         "start": "node dist",
         "bs": "npm run build && npm run start",
-
         "build": "npm run clean && npm run compile",
         "clean": "rimraf dist",
         "compile": "tsc -p tsconfig.build.json",

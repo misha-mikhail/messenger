@@ -1,16 +1,16 @@
 import { Context } from 'koa';
-import Route from '../types/route';
+import { Route, HttpMethod } from '../types/route';
 // import { Contact } from '@chat/shared';
 
 export const ContactsRoutes: Route[] = [
     {
         path: '/contacts/get',
-        method: 'GET',
+        method: HttpMethod.GET,
         action: getContacts,
     },
     {
         path: '/contacts/add',
-        method: 'POST',
+        method: HttpMethod.POST,
         action: addContact,
     },
 ];

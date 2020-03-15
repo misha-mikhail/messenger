@@ -1,7 +1,16 @@
 import { Context } from "koa";
 
-export default interface Route {
+export enum HttpMethod {
+    GET = 'get',
+    POST = 'post',
+    PATCH = 'patch',
+    PUT = 'put',
+    DELETE = 'delete',
+    OPTIONS = 'options',
+}
+
+export interface Route {
     path: string;
-    method: 'GET' | 'POST' | 'PATCH' | 'PUT';
+    method: HttpMethod;
     action: (ctx: Context) => Promise<any> | void;
 }
