@@ -1,1 +1,3 @@
-export { default as User, IUser } from './entities/User';
+export { IUser } from './abstractions/IUser';
+export { IMessage } from './abstractions/IMessage';
+export { IConversation } from './abstractions/IConversation';

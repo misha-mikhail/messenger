@@ -1,5 +1,4 @@
 import server from '../server';
-//import { Message } from '@chat/shared';
 
 server.get('/messages/get', function(request, reply) {
     const message = {
@@ -10,9 +9,8 @@ server.get('/messages/get', function(request, reply) {
 });
 
 server.post('/messages/send', function(request, reply) {
-    const message = {
-        Text: 'message sent'
-    };
+    // const repo = getCustomRepository(MessageRepository);
 
-    reply.send(message);
+    // repo.sendMessage
+    reply.send();
 })

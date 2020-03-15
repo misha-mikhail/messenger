@@ -16,13 +16,15 @@
     },
     "dependencies": {
         "@chat/shared": "^1.0.0",
+        "@typegoose/typegoose": "^6.4.0",
+        "@types/mongoose": "^5.7.6",
         "@types/node": "^13.7.7",
         "fastify": "^2.12.1",
-        "typeorm": "^0.2.24",
-        "mongodb": "^3.5.4"
+        "mongodb": "^3.5.4",
+        "mongoose": "^5.9.4"
     },
     "devDependencies": {
         "rimraf": "^3.0.2",
-        "typescript": "~3.4.5"
+        "typescript": "3.8.3"
     }
 }

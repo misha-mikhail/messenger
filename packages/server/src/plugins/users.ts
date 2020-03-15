@@ -1,11 +1,11 @@
 import server from '../server';
 import { IUser } from '@chat/shared';
-import { getCustomRepository } from 'typeorm';
-import UserRepository from '../services/user-repository';
+// import { getCustomRepository } from 'typeorm';
+// import UserRepository from '../services/user-repository';
 import GetUsersQuery from '../endpoint-queries/get-users-query';
 
 server.get<GetUsersQuery>('/users/get', async function (request, reply) {
-    const repo = getCustomRepository(UserRepository);
+    // const repo = getCustomRepository(UserRepository);
 
     const { username } = request.query;
 
@@ -16,7 +16,8 @@ server.get<GetUsersQuery>('/users/get', async function (request, reply) {
         return;
     }
 
-    const user = await repo.findByUsername(username);
+    // const user = await repo.findByUsername(username);
+    const user = {};
 
     user && reply.send(user) || reply.callNotFound();
 });
