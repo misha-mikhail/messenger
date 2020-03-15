@@ -9,7 +9,15 @@ export enum HttpMethod {
     OPTIONS = 'options',
 }
 
-export interface Route {
+export interface IHasModel {
+    /**
+     * The 'model' is a class that must have
+     * a static 'fromObject' method.
+     */
+    model?: new (args?: any) => any;
+}
+
+export interface Route extends IHasModel {
     path: string;
     method: HttpMethod;
     action: (ctx: Context) => Promise<any> | void;

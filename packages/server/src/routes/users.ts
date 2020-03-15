@@ -8,6 +8,7 @@ export const UsersRoutes: Route[] = [
         path: '/users/get',
         method: HttpMethod.GET,
         action: getUser,
+        model: GetUsersQuery,
     },
     {
         path: '/users/edit-bio',
@@ -18,20 +19,10 @@ export const UsersRoutes: Route[] = [
 
 
 async function getUser(ctx: Context) {
+    const { username } = ctx.query;
 
-    const { username } = ctx.query as GetUsersQuery;
-
-    // TODO: request query/body validation
-    if (!username) {
-        ctx.status = 400;
-        ctx.body = {
-            Error: [ 'username' ],
-        };
-        return;
-    }
-
-    // const user = await repo.findByUsername(username);
-    const user = {};
+    // TODO: find user by name
+    const user = { username };
 
     ctx.status = user ? 200 : 404;
     ctx.body = user || { Error: 'Not found!' };
@@ -39,6 +30,7 @@ async function getUser(ctx: Context) {
 
 function editBio(ctx: Context) {
     const user: IUser = {
+        Conversations: [],
         Username: 'some-username',
         Bio: 'This is the edited bio !',
     };

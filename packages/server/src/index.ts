@@ -1,4 +1,4 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 
 import { connectToDatabase } from './database/connection';
 import { startApplication } from './server';
