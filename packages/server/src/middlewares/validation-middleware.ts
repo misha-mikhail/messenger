@@ -14,6 +14,7 @@ export function validation(routes: Route[]) {
         const { model } = matchedRoute;
 
         if (!model) {
+            await next();
             return;
         }
 
