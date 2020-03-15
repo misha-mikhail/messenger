@@ -7,6 +7,7 @@ import { ContactsRoutes } from './routes/contacts';
 import { MessagesRoutes } from './routes/messages';
 import { UsersRoutes } from './routes/users';
 import { TestRoutes } from './routes/test';
+import { validation } from './middlewares/validation-middleware';
 
 function registerRoutes(router: Router, routes: Route[]) {
     for (const route of routes) {
@@ -14,21 +15,26 @@ function registerRoutes(router: Router, routes: Route[]) {
     }
 }
 
+const AllRoutes: Route[] = [
+    ...AuthRoutes,
+    ...ContactsRoutes,
+    ...MessagesRoutes,
+    ...UsersRoutes,
+    ...TestRoutes,
+]
+
 export function startApplication(port: number) {
     const app = new Koa();
     const router = new Router();
 
-    console.log(router);
-
-    registerRoutes(router, AuthRoutes);
-    registerRoutes(router, ContactsRoutes);
-    registerRoutes(router, MessagesRoutes);
-    registerRoutes(router, UsersRoutes);
-    registerRoutes(router, TestRoutes);
+    registerRoutes(router, AllRoutes);
 
     app.use(bodyparser());
+    app.use(validation(AllRoutes));
     app.use(router.routes());
     app.listen(port);
+
+    console.log(`Listening: http://localhost:${port}/`);
 
     return app;
 }

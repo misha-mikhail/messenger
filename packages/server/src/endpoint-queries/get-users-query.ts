@@ -1,7 +1,8 @@
 import {IsNotEmpty} from 'class-validator';
+
 export default class GetUsersQuery {
-    constructor(obj: any) {
-        Object.assign(this, obj);
+    static fromObject(obj: any): GetUsersQuery {
+        return Object.assign(new GetUsersQuery(), obj);
     }
 
     @IsNotEmpty()
