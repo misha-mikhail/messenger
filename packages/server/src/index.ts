@@ -1,22 +1,9 @@
 import "reflect-metadata";
 
-import server from './server';
 import { connectToDatabase } from './database/connection';
-
-require('./plugins/users');
-require('./plugins/messages');
-require('./plugins/auth');
-require('./plugins/test');
+import { startApplication } from './server';
 
 (async () => {
-    const conn = await connectToDatabase();
-
-    console.log({conn});
-
-    server.listen(3000, function (err, address) {
-        if (err) {
-            server.log.error(err)
-            process.exit(1)
-        }
-    });
+    await connectToDatabase();
+    const app = startApplication(3000);
 })();
