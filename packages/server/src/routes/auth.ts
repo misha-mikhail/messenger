@@ -1,6 +1,9 @@
 import { Context } from 'koa';
 import { Route, HttpMethod } from '../types/route';
-// import authService
+import { UserModel, User } from '../database/entities/User';
+import * as jwt from 'jsonwebtoken';
+import * as passport from 'koa-passport';
+import { jwtSecret } from '../passport/jwt';
 
 export const AuthRoutes: Route[] = [
     {
@@ -15,18 +18,40 @@ export const AuthRoutes: Route[] = [
     },
 ];
 
-function login(context: Context) {
-    const token = {
-        Value: '65as56fs4a65g4a65g4da65g4',
-    };
+async function login(ctx: Context, next: Function) {
+    await passport.authenticate('local', (err, user: User | null) => {
+        console.log({err, user});
 
-    context.body = token;
+        if (user as any === false) {
+            ctx.status = 401;
+            ctx.body = 'Login failed';
+        } else {
+            const payload = {
+                Id: (user as any)._id,
+                Username: user.Username,
+            };
+
+            const token = jwt.sign(payload, jwtSecret); // JWT is created here
+
+            console.log({token});
+
+            ctx.body = { Username: user.Username, token };
+        }
+    })(ctx, next);
 }
 
-function register(context: Context) {
-    const token = {
-        Value: '5456as6afaf4afas4f98',
-    };
+async function register(ctx: Context) {
+    // TODO: Проверить, существует ли юзер с таким юзернеймом.
 
-    context.body = token;
+    try {
+        const { username, password } = ctx.request.body;
+        const newUser = await UserModel.create(new User(username, password));
+
+        ctx.status = 201;
+        ctx.body = { Username: newUser.Username };
+    }
+    catch (err) {
+        ctx.status = 400;
+        ctx.body = err;
+    }
 }

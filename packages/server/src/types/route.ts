@@ -20,5 +20,5 @@ export interface IHasModel {
 export interface Route extends IHasModel {
     path: string;
     method: HttpMethod;
-    action: (ctx: Context) => Promise<any> | void;
+    action: (ctx: Context, next?: Function) => Promise<any> | void;
 }
