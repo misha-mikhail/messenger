@@ -8,6 +8,6 @@ export default class MessageRepository { // implements AbstractRepository<Messag
     readonly model = MessageModel;
 
     sendMessage(from: User, to: Conversation, text: string) {
-        this.model.create(Message.createMessage(from, to, text));
+        this.model.create(new Message(from, to, text));
     }
 }

@@ -5,7 +5,6 @@ import { connectToDatabase } from './database/connection';
 
 require('./plugins/users');
 require('./plugins/messages');
-require('./plugins/contacts');
 require('./plugins/auth');
 require('./plugins/test');
 

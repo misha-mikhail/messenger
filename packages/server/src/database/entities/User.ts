@@ -6,8 +6,6 @@ export class User { // implements IUser
     constructor(username: string, password: string) {
         this.Username = username;
         this.PasswordHash = password; // TODO: Hashing.
-
-        return this;
     }
 
     @prop()

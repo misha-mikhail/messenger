@@ -3,16 +3,12 @@ import { User, Conversation } from '.';
 import { IMessage } from '@chat/shared';
 
 export class Message { // implements IMessage
-    static createMessage(sender: User, toConversation: Conversation, text: string): Message {
-        // TODO: заменить на конструктор.
+    constructor(sender: User, toConversation: Conversation, text: string) {
+        this.Sender = sender;
+        this.Conversation = toConversation;
+        this.Text = text;
 
-        const _this = new Message()
-        _this.Sender = sender;
-        _this.Conversation = toConversation;
-        _this.Text = text;
-
-        _this.SentAt = new Date();
-        return _this;
+        this.SentAt = new Date();
     }
 
     @prop({ ref: 'User' })
