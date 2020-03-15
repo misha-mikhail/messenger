@@ -2,6 +2,7 @@ import { IUser } from '@chat/shared';
 import GetUsersQuery from '../endpoint-queries/get-users-query';
 import { Context } from 'koa';
 import { Route, HttpMethod } from '../types/route';
+import { validate } from 'class-validator';
 
 export const UsersRoutes: Route[] = [
     {
@@ -18,18 +19,20 @@ export const UsersRoutes: Route[] = [
 
 
 async function getUser(ctx: Context) {
+    const model = new GetUsersQuery(ctx.query);
+    const { username } = model;
 
-    const { username } = ctx.query as GetUsersQuery;
-
-    // TODO: request query/body validation
-    if (!username) {
+    const errors = await validate(model);
+    if (errors.length)
+    {
+        console.log({errors});
         ctx.status = 400;
         ctx.body = {
             Error: [ 'username' ],
         };
+
         return;
     }
-
     // const user = await repo.findByUsername(username);
     const user = {};
 
@@ -39,6 +42,7 @@ async function getUser(ctx: Context) {
 
 function editBio(ctx: Context) {
     const user: IUser = {
+        Conversations: [],
         Username: 'some-username',
         Bio: 'This is the edited bio !',
     };
