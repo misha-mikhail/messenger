@@ -17,13 +17,16 @@
     "dependencies": {
         "@chat/shared": "^1.0.0",
         "@typegoose/typegoose": "^6.4.0",
-        "@types/mongoose": "^5.7.6",
-        "@koa/router": "^8.0.8",
         "@types/koa": "^2.11.2",
         "@types/node": "^13.7.7",
+        "@types/mongoose": "^5.7.6",
+        "class-transformer": "^0.2.3",
         "class-validator": "^0.11.0",
         "koa": "^2.11.0",
         "koa-bodyparser": "^4.2.1",
+        "koa-multer": "^1.0.2",
+        "koa-router": "^8.0.0-alpha.1",
+        "routing-controllers": "^0.8.1-alpha.2",
         "mongodb": "^3.5.4",
         "mongoose": "^5.9.4"
     },
