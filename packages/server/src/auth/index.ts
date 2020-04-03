@@ -1,0 +1,1 @@
+export { getJwtSecret } from './jwt';

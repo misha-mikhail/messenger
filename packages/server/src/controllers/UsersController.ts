@@ -1,5 +1,5 @@
 import { IUser } from '@chat/shared';
-import GetUsersQuery from '../endpoint-queries/get-users-query';
+import GetUserQuery from '../endpoint-queries/get-user-query';
 import { JsonController, Post, Get, QueryParams, OnUndefined } from 'routing-controllers';
 import { UserModel } from '../database/entities/User';
 
@@ -8,9 +8,8 @@ export class UsersController {
 
     @Get('/get')
     @OnUndefined(404)
-    async getUserInfo(@QueryParams() query: GetUsersQuery) {
-        // TODO: не возвращать PasswordHash и Salt здесь.
-        return (await UserModel.findOne({ Username: query.username }))?.toObject();
+    async getUserInfo(@QueryParams() query: GetUserQuery) {
+        return (await UserModel.findOne(query, 'Username Bio'))?.toObject();
     }
 
     @Post('/edit-bio')

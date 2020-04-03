@@ -1,1 +1,0 @@
-export { passportUseJwtStrategy } from './jwt';

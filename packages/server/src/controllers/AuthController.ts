@@ -1,45 +1,72 @@
 import { JsonController, Post, Body, BadRequestError, HttpCode, Ctx } from 'routing-controllers';
-import { Context } from 'koa';
 import * as jwt from 'jsonwebtoken';
-import * as passport from 'koa-passport';
-import { jwtSecret } from '../passport/jwt';
+import { getJwtSecret } from '../auth/';
 import { User } from '../database/entities';
 import { UserModel } from '../database/entities/User';
+import { IsNotEmpty } from 'class-validator';
+
+// TODO: вынести в отдельный файл в ~/endpoint-queries/
+class UsernamePasswordRequest {
+    @IsNotEmpty()
+    Username: string;
+
+    @IsNotEmpty()
+    Password: string;
+}
+
+interface JwtPayload {
+    Id: string;
+    Username: string;
+}
+
+// TODO: перенести в UserService.createJwt(...).
+function createJwt(user: User & { _id: string }) {
+    const payload: JwtPayload = {
+        Id: user._id.toString(),
+        Username: user.Username,
+    };
+
+    const jwtSecret = getJwtSecret();
+
+    const token = jwt.sign(payload, jwtSecret);
+
+    return token;
+}
 
 @JsonController('/auth')
 export class AuthController {
 
     @Post('/login')
-    async login(@Ctx() ctx: Context) {
-        // await passport.authenticate('local', (err, user: User | null) => {
-        //     console.log({err, user});
+    async login(@Body() loginRequest: UsernamePasswordRequest) {
+        const user = await UserModel.findOne({ Username: loginRequest.Username });
 
-        //     if (user as any === false) {
-        //         ctx.status = 401;
-        //         ctx.body = 'Login failed';
-        //     } else {
-        //         const payload = {
-        //             Id: (user as any)._id,
-        //             Username: user.Username,
-        //         };
+        if (!user || !user.verifyPassword(loginRequest.Password)) {
+            throw new BadRequestError('Wrong username or password');
+        }
 
-        //         const token = jwt.sign(payload, jwtSecret); // JWT is created here
+        const token = createJwt(user);
 
-        //         console.log({token});
+        console.log({token});
 
-        //         ctx.body = { Username: user.Username, token };
-        //     }
-        // })(ctx, next);
+        return { Username: user.Username, Token: token };
     }
 
     @Post('/register')
     @HttpCode(201)
-    async register(@Body() requestBody: any) {
+    async register(@Body() registerRequest: UsernamePasswordRequest) {
         try {
-            const { username, password } = requestBody;
-            const newUser = await UserModel.create(new User(username, password));
+            const { Username, Password } = registerRequest;
 
-            return { Username: newUser.Username };
+            // TODO:
+            // User with such name already exists.
+
+            const newUser = await UserModel.create(new User(Username, Password));
+
+            console.log({newUser});
+
+            const token = createJwt(newUser);
+
+            return { Username, Token: token };
         }
         catch (err) {
             throw new BadRequestError(err);
