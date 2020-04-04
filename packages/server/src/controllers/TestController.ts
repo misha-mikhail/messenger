@@ -1,9 +1,15 @@
 import { UserModel, User } from '../database/entities/User';
 import { ConversationModel, Conversation } from '../database/entities/Conversation';
-import { JsonController, Get } from 'routing-controllers';
+import { JsonController, Get, Authorized } from 'routing-controllers';
 
 @JsonController('/test')
 export class TestController {
+
+    @Get('/auth')
+    @Authorized()
+    async testAuthorized() {
+        return 'you are authorized!';
+    }
 
     @Get('/init')
     async testInitDatabase() {
