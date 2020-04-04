@@ -1,14 +1,14 @@
 import { UserModel, User } from '../database/entities/User';
 import { ConversationModel, Conversation } from '../database/entities/Conversation';
-import { JsonController, Get, Authorized } from 'routing-controllers';
+import { JsonController, Get, Authorized, CurrentUser } from 'routing-controllers';
 
 @JsonController('/test')
 export class TestController {
 
     @Get('/auth')
     @Authorized()
-    async testAuthorized() {
-        return 'you are authorized!';
+    async testAuthorized(@CurrentUser() currentUser: User) {
+        return 'Your username is: ' + currentUser.Username;
     }
 
     @Get('/init')
