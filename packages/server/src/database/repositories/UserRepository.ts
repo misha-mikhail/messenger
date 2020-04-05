@@ -1,6 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 import { UserModel, User } from '../entities/User';
 import { JwtPayload } from '../../auth';
+import { IUser } from '@chat/shared';
 
 export class UserRepository {
     readonly model = UserModel;
@@ -16,6 +17,16 @@ export class UserRepository {
 
     async findUserByUsername(username: string) {
         return await this.model.findOne({ Username: username });
+    }
+
+    async getUserInfo(username: string): Promise<IUser> {
+        const user = (await this.model.findOne({ Username: username }, 'Username Bio'))?.toObject();
+
+        if (user) {
+            user._id = user._id.toString();
+        }
+
+        return user;
     }
 
     async findUserByToken(token: string) {
