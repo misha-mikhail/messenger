@@ -8,6 +8,7 @@
 
 # Get started
 
+0. [Install Node.js (ver >= 10.0.0)](https://nodejs.org/).
 1. `npm run setup`
 2. `npm run bs:server` // build-start server
 
@@ -20,7 +21,8 @@
 
 1. `server`
 
-    Бэкенд приложения на Node.js (Koa, MongoDB + Mongoose).
+    Бэкенд приложения на Node.js.\
+    Из библиотек: Koa, MongoDB + Mongoose.
 
 2. `web`
 

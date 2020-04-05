@@ -1,23 +1,48 @@
-import { JsonController, Post } from 'routing-controllers';
+import { JsonController, Post, Body, BadRequestError, HttpCode } from 'routing-controllers';
+import { UserCredentials } from '../endpoint-queries/UserCredentials';
+import { UserRepository } from '../database/repositories/UserRepository';
+import { getJwtSecret } from '../auth';
 
 @JsonController('/auth')
 export class AuthController {
+    // TODO: Inject UserRepository here (Issue #9).
 
     @Post('/login')
-    login() {
-        const token = {
-            Value: '65as56fs4a65g4a65g4da65g4',
-        };
+    async login(@Body() loginRequest: UserCredentials) {
+        const userRepo = new UserRepository(await getJwtSecret())
 
-        return token;
+        const user = await userRepo.findUserByUsername(loginRequest.Username);
+
+        if (!user || !user.verifyPassword(loginRequest.Password)) {
+            throw new BadRequestError('Wrong username or password');
+        }
+
+        const token = userRepo.createJwt(user);
+
+        return { Username: user.Username, Token: token };
     }
 
-    @Post()
-    register() {
-        const token = {
-            Value: '5456as6afaf4afas4f98',
-        };
+    @Post('/register')
+    @HttpCode(201)
+    async register(@Body() registerRequest: UserCredentials) {
+        const userRepo = new UserRepository(await getJwtSecret())
 
-        return token;
+        if (await userRepo.findUserByUsername(registerRequest.Username)) {
+            throw new BadRequestError('User with such name already exists.');
+        }
+
+        try {
+            const newUser = await userRepo.create(
+                                    registerRequest.Username,
+                                    registerRequest.Password
+                                );
+
+            const token = userRepo.createJwt(newUser);
+
+            return { Username: registerRequest.Username, Token: token };
+        }
+        catch (err) {
+            throw new BadRequestError(err);
+        }
     }
 }
