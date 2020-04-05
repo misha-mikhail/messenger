@@ -1,7 +1,15 @@
+import { promises } from 'fs';
 
-let jwtSecret = '12453tafsf'; // TODO: from config
+let jwtSecret = '';
 
-export function getJwtSecret() {
-    return jwtSecret
-        ?? (jwtSecret = 'TODO: *place here a function call that gets the jwt secret from some config*');
+export async function getJwtSecret() {
+    if (jwtSecret) return jwtSecret;
+
+    const appSettingsFile = await promises.readFile('appSettings.json');
+
+    if (!appSettingsFile.length) return null;
+
+    const appSettings = JSON.parse(appSettingsFile.toString());
+
+    return (jwtSecret = appSettings.Jwt.Secret);
 }

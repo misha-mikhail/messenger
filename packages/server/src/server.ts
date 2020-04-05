@@ -1,38 +1,23 @@
 import { createKoaServer, Action } from 'routing-controllers';
-import { UserModel } from './database/entities/User';
-import * as jwt from 'jsonwebtoken';
 import { getJwtSecret } from './auth';
-
-// TODO: вынести в UserRepository
-async function findUserByToken(token: string) {
-    if (!token) return null;
-
-    const jwtSecret = getJwtSecret();
-
-    try {
-        jwt.verify(token, jwtSecret);
-    } catch {
-        return null;
-    }
-
-    const decodedToken = jwt.decode(token) as Record<string, object>;
-
-    console.log('decodedToken', decodedToken);
-
-    const user = await UserModel.findById(decodedToken.Id);
-    return user;
-}
+import { UserRepository } from './database/repositories';
 
 export function startApplication(port: number) {
     const app = createKoaServer({
         controllers: [ __dirname + '/controllers/*.js' ],
-        authorizationChecker: async (action: Action, roles: string[]) => {
+        authorizationChecker: async (action: Action, _roles: string[]) => {
+            // TODO: DI if possible (issue #9).
+            const userRepo = new UserRepository(await getJwtSecret());
+
             const token = action.request.headers['authorization'];
-            return !!findUserByToken(token);
+            return !!userRepo.findUserByToken(token);
         },
         currentUserChecker: async (action: Action) => {
+            // TODO: DI if possible (issue #9).
+            const userRepo = new UserRepository(await getJwtSecret());
+
             const token = action.request.headers['authorization'];
-            return findUserByToken(token);
+            return userRepo.findUserByToken(token);
         },
     });
 

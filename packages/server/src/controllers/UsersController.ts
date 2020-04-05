@@ -1,5 +1,5 @@
 import { IUser } from '@chat/shared';
-import GetUserQuery from '../endpoint-queries/get-user-query';
+import GetUserQuery from '../endpoint-queries/GetUserQuery';
 import { JsonController, Post, Get, QueryParams, OnUndefined } from 'routing-controllers';
 import { UserModel } from '../database/entities/User';
 

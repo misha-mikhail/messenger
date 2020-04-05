@@ -1,1 +1,2 @@
-export { getJwtSecret } from './jwt';
+export { getJwtSecret } from "./jwt";
+export { JwtPayload } from './JwtPayload';
