@@ -1,6 +1,6 @@
-import { IUser } from '@chat/shared';
+import { User } from '../database/entities/User';
 import GetUserQuery from '../endpoint-queries/GetUserQuery';
-import { JsonController, Post, Get, QueryParams, OnUndefined } from 'routing-controllers';
+import { JsonController, Patch, Get, QueryParams, OnUndefined, CurrentUser, Authorized, Body, HttpCode, OnNull } from 'routing-controllers';
 import { UserRepository } from '../database/repositories/UserRepository';
 import { getJwtSecret } from '../auth';
 
@@ -17,15 +17,17 @@ export class UsersController {
         return await userRepo.getUserInfo(query.Username);
     }
 
-    @Post('/edit-bio')
-    editBio() {
-        const user: IUser = {
-            Conversations: [],
-            Username: 'some-username',
-            Bio: 'This is the edited bio !',
-        };
+    @Patch('/edit-bio')
+    @OnNull(204)
+    @Authorized()
+    async editBio(
+        @CurrentUser() currentUser: User & { _id: Buffer },
+        @Body() requestBody: { NewBio: string }
+    ) {
+        const userRepo = new UserRepository(await getJwtSecret());
+        await userRepo.editBio(currentUser._id, requestBody.NewBio);
 
-        return user;
+        return null;
     }
 
 }
