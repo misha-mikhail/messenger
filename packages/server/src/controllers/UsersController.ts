@@ -25,7 +25,8 @@ export class UsersController {
         @Body() requestBody: { NewBio: string }
     ) {
         const userRepo = new UserRepository(await getJwtSecret());
-        await userRepo.editBio(currentUser._id, requestBody.NewBio);
+
+        await userRepo.editBio(currentUser, requestBody.NewBio);
 
         return null;
     }

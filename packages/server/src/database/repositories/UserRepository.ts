@@ -43,10 +43,8 @@ export class UserRepository {
         return await this.model.findById(decodedToken.Id);
     }
 
-    async editBio(userId: any, newBio: string) {
-        const user = await this.model.findById(userId);
-        user.Bio = newBio;
-        await user.save();
+    async editBio(user: User, newBio: string) {
+        await this.model.updateOne(user, { Bio: newBio });
     }
 
     createJwt(user: User & { _id: string }) {
