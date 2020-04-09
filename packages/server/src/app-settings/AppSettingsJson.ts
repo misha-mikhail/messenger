@@ -1,10 +1,10 @@
 export interface AppSettingsJson {
-    Jwt: {
-        Secret: string
+    Jwt?: {
+        Secret?: string
     };
 
-    DatabaseConnection: {
-        MongoUrl: string,
-        DatabaseName: string,
+    DatabaseConnection?: {
+        MongoUrl?: string,
+        DatabaseName?: string,
     };
 }
