@@ -1,15 +1,11 @@
-import { promises } from 'fs';
+import { readAppSettings } from '../app-settings';
 
 let jwtSecret = '';
 
 export async function getJwtSecret() {
     if (jwtSecret) return jwtSecret;
 
-    const appSettingsFile = await promises.readFile('appSettings.json');
-
-    if (!appSettingsFile.length) return null;
-
-    const appSettings = JSON.parse(appSettingsFile.toString());
+    const appSettings = await readAppSettings();
 
     return (jwtSecret = appSettings.Jwt.Secret);
 }

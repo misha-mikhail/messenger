@@ -9,8 +9,11 @@
 # Get started
 
 0. [Install Node.js (ver >= 10.0.0)](https://nodejs.org/).
-1. `npm run setup`
-2. `npm run bs:server` // build-start server
+1. Copy and paste the appSettings.template.json file contents into a new appSettings.json in the same folder.\
+    Optionally, you can edit some of the settings.\
+    Read more details on configuration files [here](docs/configuration-files.md).
+2. `npm run setup`
+3. `npm run bs:server` // build-start server
 
 
 # Как всё устроено
@@ -19,30 +22,31 @@
 
 Его модули:
 
-1. `server`
+## `server`
 
-    Бэкенд приложения на Node.js.\
-    Из библиотек: Koa, MongoDB + Mongoose.
+Бэкенд приложения на Node.js.\
+Из библиотек: Koa, MongoDB + Mongoose.
 
-2. `web`
+## `web`
 
-    Веб-фронтенд приложения.
+Веб-фронтенд приложения.
 
-3. `shared`
+## `shared`
 
-    Общее.
+Общее.
 
-    **Чему здесь быть:**\
-    Классы, интерфейсы, функции, которые можно использовать из любого модуля, описанного выше.
+### Чему здесь быть:
 
-    **Чего здесь быть не должно:**\
-    Frontend-specific или backend-specific вещей.
+Классы, интерфейсы, функции, которые можно использовать из любого модуля, описанного выше.
 
-    Например:
-    1. Энтитей (с БД у нас работает только бэкенд!)\
-        Вместо энтитей (`User`, `Message`, ...) здесь лучше всего хранить их интерфейсы (`IUser`, `IMessage`, ...).
-    2. Импортов `mongoose` в код (с БД у нас работает только бэкенд!)
-    3. Если наступлю на грабли, то допишу здесь пункт.
+### Чего здесь быть не должно:
+Frontend-specific или backend-specific вещей.
+
+Например:
+1. Энтитей (с БД у нас работает только бэкенд!)\
+    Вместо энтитей (`User`, `Message`, ...) здесь лучше всего хранить их интерфейсы (`IUser`, `IMessage`, ...).
+2. Импортов `mongoose` в код (с БД у нас работает только бэкенд!)
+3. Если наступлю на грабли, то допишу здесь пункт.
 
 
 # How can I contribute?
