@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -41,7 +41,20 @@ export default function App() {
 }
 
 function Home() {
-  return <h2>Home</h2>;
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetch('http://localhost:3001/messages/get').then(f => f.json()).then(j => setData(j))
+    }, []);
+
+    return (
+          <div>
+              <h2>Home</h2>
+              <div>
+                  { JSON.stringify(data) }
+              </div>
+          </div>
+      );
 }
 
 function About() {
