@@ -13,9 +13,7 @@
     Optionally, you can edit some of the settings.\
     Read more details on configuration files [here](docs/configuration-files.md).
 2. `npm run setup`
-3. `npm run bs:server` // Build-start server
-4. In another terminal instance:\
-   `npm run rs:start` // Start React development server.
+3. `npm run dev:both`
 
 # Как всё устроено
 
