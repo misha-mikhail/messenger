@@ -5,6 +5,7 @@
         "setup": "npm install && npm run bootstrap",
         "start:server": "npm run --prefix packages/server start",
         "bs:server": "npm run --prefix packages/server bs",
+        "rs:start": "npm run --prefix packages/web rs:start",
         "bootstrap": "lerna bootstrap",
         "clean": "lerna run clean",
         "build": "lerna run build",

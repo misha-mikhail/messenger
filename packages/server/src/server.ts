@@ -4,6 +4,7 @@ import { UserRepository } from './database/repositories';
 
 export function startApplication(port: number) {
     const app = createKoaServer({
+        cors: true,
         controllers: [ __dirname + '/controllers/*.js' ],
         authorizationChecker: async (action: Action, _roles: string[]) => {
             // TODO: DI if possible (issue #9).

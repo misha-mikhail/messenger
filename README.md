@@ -13,8 +13,9 @@
     Optionally, you can edit some of the settings.\
     Read more details on configuration files [here](docs/configuration-files.md).
 2. `npm run setup`
-3. `npm run bs:server` // build-start server
-
+3. `npm run bs:server` // Build-start server
+4. In another terminal instance:\
+   `npm run rs:start` // Start React development server.
 
 # Как всё устроено
 
@@ -30,6 +31,10 @@
 ## `web`
 
 Веб-фронтенд приложения.
+
+React.
+
+В корне есть автосгенерированный [README](packages/web/README.md), можно его почитать даже немного.
 
 ## `shared`
 

@@ -5,5 +5,5 @@ import { startApplication } from './server';
 
 (async () => {
     await connectToDatabase();
-    const app = startApplication(3000);
+    const app = startApplication(3001);
 })();
