@@ -1,9 +1,13 @@
 import * as mongoose from 'mongoose';
+import { readAppSettings } from '../app-settings';
 
 export async function connectToDatabase() {
-    return await mongoose.connect('mongodb://localhost:27017/', {
+    const connectionSettings = (await readAppSettings())?.DatabaseConnection;
+
+    return await mongoose.connect(connectionSettings.MongoUrl, {
+        dbName: connectionSettings.DatabaseName,
+
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        dbName: 'chat',
     });
 }
