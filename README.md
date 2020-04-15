@@ -10,7 +10,9 @@
 
 0. [Install Node.js (ver >= 10.0.0)](https://nodejs.org/).
 1. `npm run setup`
-2. `npm run bs:server` // build-start server
+2. `npm run bs:server` // Build-start server
+3. In another terminal instance:\
+   `npm run rs:start` // Start React development server.
 
 
 # Как всё устроено
@@ -27,6 +29,10 @@
 2. `web`
 
     Веб-фронтенд приложения.
+
+    React.
+
+    В корне есть автосгенерированный [README](packages/web/README.md), можно его почитать даже немного.
 
 3. `shared`
 
