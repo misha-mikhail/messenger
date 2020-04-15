@@ -6,12 +6,14 @@
         "start:server": "npm run --prefix packages/server start",
         "bs:server": "npm run --prefix packages/server bs",
         "rs:start": "npm run --prefix packages/web rs:start",
+        "dev:both": "concurrently --kill-others \"npm:rs:start\" \"npm:bs:server\"",
         "bootstrap": "lerna bootstrap",
         "clean": "lerna run clean",
         "build": "lerna run build",
         "pub": "lerna publish"
     },
     "devDependencies": {
+        "concurrently": "^5.1.0",
         "lerna": "~3.14.0",
         "typescript": "3.8.3"
     },
