@@ -16,12 +16,12 @@ const Button = styled.a`
     align-items: center;
     flex-basis: 50%;
     text-transform: uppercase;
+    padding: 20px 0;
 `;
 
 const ButtonsContainer = styled.section`
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
 `;
 
 const AuthNav = styled.nav`
