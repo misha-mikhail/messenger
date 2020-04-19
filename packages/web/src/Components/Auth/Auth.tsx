@@ -8,6 +8,8 @@ import { FormItem } from './FormItem';
 import { baseUrl } from '../../api/baseUrl';
 
 const AuthContainer = styled.section`
+    margin: 0 auto; /* Это временно. Нужно сделать нормально! */
+
     width: 500px;
 
     display: flex;
