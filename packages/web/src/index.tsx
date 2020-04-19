@@ -5,12 +5,20 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 import { baseUrl } from './api/baseUrl';
+import { Provider } from 'react-redux';
+import { store } from './state';
+
+// Разкомментить, если хочется последить за изменениями стора.
+// store.subscribe(() => console.log(store.getState()));
 
 axios.defaults.baseURL = baseUrl;
+axios.defaults.headers.common['Authorization'] = store.getState()?.token;
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <Provider store={store}>
+            <App />
+        </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );

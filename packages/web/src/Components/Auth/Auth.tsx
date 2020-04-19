@@ -6,6 +6,8 @@ import { AuthFormState } from './AuthFormState';
 import { IUserCredentials } from '@chat/shared';
 import { FormItem } from './FormItem';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { setToken } from '../../state';
 
 const AuthContainer = styled.section`
     margin: 0 auto; /* Это временно. Нужно сделать нормально! */
@@ -41,7 +43,7 @@ const Submit = styled(FormItem)`
     }
 `;
 
-export function Auth() {
+let AuthComponent = (props: { dispatch: Function }) => {
     const [formState, setFormState] = useState(AuthFormState.Login);
     const [userCredentials, setUserCredentials] = useState<IUserCredentials>({Username: '', Password: ''});
 
@@ -49,7 +51,7 @@ export function Auth() {
 
     const submitForm = async () => {
         const resp = await axios.post('/auth/' + formState, userCredentials);
-        console.log(resp.data);
+        props.dispatch(setToken(resp.data.Token));
     };
 
     return (
@@ -67,3 +69,5 @@ export function Auth() {
         </AuthContainer>
     );
 }
+
+export const Auth = connect()(AuthComponent);
