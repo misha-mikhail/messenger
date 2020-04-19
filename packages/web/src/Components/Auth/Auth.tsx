@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { LoginForm } from "./LoginForm";
-import { RegisterForm } from './RegisterForm';
-import { AuthNavbar } from './AuthNavbar';
-import { AuthFormState } from "./AuthFormState";
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { AuthCredentialsForm } from './AuthCredentialsForm';
+import { AuthNavbar } from './AuthNavbar';
+import { AuthFormState } from './AuthFormState';
+import { IUserCredentials } from '@chat/shared';
+import { FormItem } from './FormItem';
+import { baseUrl } from '../../api/baseUrl';
 
 const AuthContainer = styled.section`
     width: 500px;
@@ -13,26 +15,60 @@ const AuthContainer = styled.section`
     background: #F3F3F3;
 `;
 
-const Form = styled.section`
+const FormContainer = styled.section`
     padding: 20px 40px;
+    padding-bottom: 28px; /* Я так вижу. */
+`;
+
+const Submit = styled(FormItem)`
+    &:not(:first-child), :first-child { /* Злой оверрайд стилей из FormItem. */
+        margin-top: 20px;
+    }
+
+    cursor: pointer;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 8px 0;
+    color: #777;
+    background: #DADADA;
+
+    &:hover {
+        background: #C4C4C4;
+    }
 `;
 
 export function Auth() {
-    const [navState, setNavState] = useState(AuthFormState.Register);
+    const [formState, setFormState] = useState(AuthFormState.Login);
+    const [userCredentials, setUserCredentials] = useState<IUserCredentials>({Username: '', Password: ''});
+
+    useEffect(() => setUserCredentials({Username: '', Password: ''}), [ formState ]);
+
+    const submitForm = async () => {
+        const resp = await fetch(baseUrl + '/auth/' + formState, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userCredentials),
+        });
+
+        const json = await resp.json();
+
+        console.log(json);
+    };
 
     return (
         <AuthContainer>
-            <AuthNavbar
-                state={navState}
-                setState={setNavState}
-            />
-            <Form>
-                {
-                    navState === AuthFormState.Login
-                  ? <LoginForm />
-                  : <RegisterForm />
-                }
-            </Form>
+            <AuthNavbar state={formState} setState={setFormState} />
+            <FormContainer>
+                <AuthCredentialsForm
+                    credentials={userCredentials}
+                    setCredentials={setUserCredentials} />
+
+                <Submit onClick={submitForm}>
+                    {formState === AuthFormState.Login ? 'Let' : 'Register'} me in!
+                </Submit>
+            </FormContainer>
         </AuthContainer>
     );
 }

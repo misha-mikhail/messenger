@@ -15,8 +15,15 @@ const Button = styled.a`
     justify-content: center;
     align-items: center;
     flex-basis: 50%;
-    text-transform: uppercase;
     padding: 20px 0;
+
+    font-size: 15px;
+    text-transform: uppercase;
+
+
+    &:hover {
+        /* TODO: Add ghost copy of sliding underline. */
+    }
 `;
 
 const ButtonsContainer = styled.section`

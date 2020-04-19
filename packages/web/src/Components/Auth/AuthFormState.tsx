@@ -1,4 +1,4 @@
 export enum AuthFormState {
-    Login,
-    Register
+    Login = 'login',
+    Register = 'register',
 }
