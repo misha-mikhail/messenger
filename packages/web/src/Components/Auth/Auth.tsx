@@ -5,7 +5,7 @@ import { AuthNavbar } from './AuthNavbar';
 import { AuthFormState } from './AuthFormState';
 import { IUserCredentials } from '@chat/shared';
 import { FormItem } from './FormItem';
-import { baseUrl } from '../../api/baseUrl';
+import axios from 'axios';
 
 const AuthContainer = styled.section`
     margin: 0 auto; /* Это временно. Нужно сделать нормально! */
@@ -48,15 +48,8 @@ export function Auth() {
     useEffect(() => setUserCredentials({Username: '', Password: ''}), [ formState ]);
 
     const submitForm = async () => {
-        const resp = await fetch(baseUrl + '/auth/' + formState, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userCredentials),
-        });
-
-        const json = await resp.json();
-
-        console.log(json);
+        const resp = await axios.post('/auth/' + formState, userCredentials);
+        console.log(resp.data);
     };
 
     return (
