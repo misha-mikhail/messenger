@@ -1,8 +1,10 @@
 import React, { Dispatch } from 'react';
-import { AuthTextboxFormItem } from './AuthTextbox';
+import { AuthTextbox } from './AuthTextbox';
 import { IUserCredentials } from '@chat/shared';
+import { AuthFormErrors } from './AuthFormErrors';
 
 interface Props {
+    errors?: AuthFormErrors;
     credentials: IUserCredentials;
     setCredentials: Dispatch<IUserCredentials>;
 }
@@ -13,8 +15,16 @@ export function AuthCredentialsForm(props: Props) {
 
     return (
         <form>
-            <AuthTextboxFormItem label='Username' value={props.credentials.Username} onInput={setUsername} />
-            <AuthTextboxFormItem label='Password' value={props.credentials.Password} onInput={setPassword} type='password' />
+            <AuthTextbox errorMessage={props.errors?.Username}
+                         label='Username'
+                         value={props.credentials.Username}
+                         onInput={setUsername} />
+
+            <AuthTextbox errorMessage={props.errors?.Password}
+                         label='Password'
+                         value={props.credentials.Password}
+                         onInput={setPassword}
+                         type='password' />
         </form>
     );
 }

@@ -1,14 +1,10 @@
 import React from  'react';
 import styled from 'styled-components';
 import { AuthFormState } from './AuthFormState';
-
-enum Colors {
-    DarkGray = '#777',
-    Gray = '#C0C0C0',
-}
+import { AuthFormColors } from './AuthFormColors';
 
 const Button = styled.a`
-    color: ${Colors.DarkGray};
+    color: ${AuthFormColors.DarkestGray};
 
     cursor: pointer;
     display: flex;
@@ -35,14 +31,14 @@ const AuthNav = styled.nav`
     width: 100%;
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid ${Colors.Gray};
+    border-bottom: 1px solid ${AuthFormColors.Gray};
 `;
 
 const SlidingUnderline = styled.div<{ state: AuthFormState }>`
     width: 50%;
     height: 4px;
     margin-top: -4px;
-    background: ${Colors.Gray};
+    background: ${AuthFormColors.Gray};
 
     /* TODO: Add sliding animation. */
     /* https://stackoverflow.com/questions/30587900/css-margin-left-transition-not-working */

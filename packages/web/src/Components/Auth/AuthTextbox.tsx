@@ -1,10 +1,11 @@
 import React, { Dispatch } from 'react';
 import styled from 'styled-components';
 import { FormItem } from './FormItem';
+import { AuthFormColors } from './AuthFormColors';
 
 const TextFormItem = styled(FormItem)`
     flex-direction: column;
-    color: #777;
+    color: ${AuthFormColors.DarkestGray};
 
     > label {
         margin-left: 2px;
@@ -17,15 +18,18 @@ const TextFormItem = styled(FormItem)`
 
         font-size: 16px;
         padding: 8px 4px;
-        caret-color: #777;
-        border: 3px solid #DFDFDF;
+        caret-color: ${AuthFormColors.DarkestGray};
+        border: 3px solid ${AuthFormColors.SoftGray};
+        border-color: ${props => !props.errorMessage
+                               ? AuthFormColors.SoftGray
+                               : AuthFormColors.SoftRed };
         outline: none;
     }
 `;
 
-export function AuthTextboxFormItem(props: { label: string, value: string, type?: string, onInput: Dispatch<string> }) {
+export function AuthTextbox(props: { label: string, value: string, type?: string, errorMessage?: string, onInput: Dispatch<string> }) {
     return (
-        <TextFormItem>
+        <TextFormItem errorMessage={props.errorMessage}>
             <label>{props.label}</label>
             <input onChange={e => props.onInput(e.target.value)} value={props.value} type={props.type} />
         </TextFormItem>
