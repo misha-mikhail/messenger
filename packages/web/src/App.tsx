@@ -1,6 +1,6 @@
 import React from 'react';
 import { Home } from "./Components/Home";
-import { Auth } from './Components/Auth/Auth';
+import { Auth } from './Components/Auth';
 import {
     BrowserRouter as Router,
     Switch,
