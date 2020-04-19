@@ -4,8 +4,13 @@ import axios from 'axios';
 export function Home() {
     const [data, setData] = useState(null);
 
+    const getAndSetData = async () => {
+        const resp = await axios.get('/messages/get');
+        setData(resp.data);
+    };
+
     useEffect(() => {
-        (async () => setData((await axios.get('/messages/get')).data))();
+        getAndSetData();
     }, []);
 
     return (
