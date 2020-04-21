@@ -3,7 +3,7 @@
     "private": true,
     "scripts": {
         "setup": "npm install && npm run bootstrap",
-        "bootstrap": "lerna bootstrap",
+        "bootstrap": "lerna bootstrap --no-ci",
 
         "dev:both": "concurrently --kill-others \"npm:rs:start\" \"npm:bs:server\"",
 
