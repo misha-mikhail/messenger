@@ -7,14 +7,13 @@ import { getJwtSecret } from '../auth';
 @JsonController('/users')
 export class UsersController {
 
-    // TODO: DI (issue #9).
+    constructor(private readonly userRepo: UserRepository)
+    { }
 
     @Get('/get')
     @OnUndefined(404)
     async getUserInfo(@QueryParams() query: GetUserQuery) {
-        const userRepo = new UserRepository(await getJwtSecret());
-
-        return await userRepo.getUserInfo(query.Username);
+        return await this.userRepo.getUserInfo(query.Username);
     }
 
     @Patch('/edit-bio')
@@ -24,10 +23,7 @@ export class UsersController {
         @CurrentUser() currentUser: User & { _id: Buffer },
         @Body() requestBody: { NewBio: string }
     ) {
-        const userRepo = new UserRepository(await getJwtSecret());
-
-        await userRepo.editBio(currentUser, requestBody.NewBio);
-
+        await this.userRepo.editBio(currentUser, requestBody.NewBio);
         return null;
     }
 

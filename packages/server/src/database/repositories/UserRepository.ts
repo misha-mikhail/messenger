@@ -2,12 +2,14 @@ import * as jwt from 'jsonwebtoken';
 import { UserModel, User } from '../entities/User';
 import { JwtPayload } from '../../auth';
 import { IUser } from '@chat/shared';
+import { Service, Inject } from 'typedi';
 
+@Service()
 export class UserRepository {
     readonly model = UserModel;
     readonly jwtSecret: string;
 
-    constructor(jwtSecret: string) {
+    constructor(@Inject('jwtSecret')jwtSecret: string) {
         this.jwtSecret = jwtSecret;
     }
 

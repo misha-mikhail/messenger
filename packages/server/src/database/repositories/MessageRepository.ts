@@ -2,8 +2,10 @@ import { User, Message } from "../entities";
 import { IAbstractRepository } from './AbstractRepository';
 import { MessageModel } from '../entities/Message';
 import { Conversation } from '../entities/Conversation';
+import { Service } from "typedi";
 
 // unused
+@Service()
 export default class MessageRepository { //implements IAbstractRepository<Message> {
     readonly model = MessageModel;
 
