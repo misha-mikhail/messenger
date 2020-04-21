@@ -4,8 +4,8 @@ import { UserRepository } from '../database/repositories/UserRepository';
 
 @JsonController('/auth')
 export class AuthController {
-    constructor(private readonly userRepo: UserRepository)
-    { }
+    constructor(private readonly userRepo: UserRepository){
+    }
 
     @Post('/login')
     async login(@Body() loginRequest: UserCredentials) {

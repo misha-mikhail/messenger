@@ -2,10 +2,11 @@ import { createKoaServer, Action, useContainer } from 'routing-controllers';
 import { getJwtSecret } from './auth';
 import { UserRepository } from './database/repositories';
 import {Container} from "typedi";
+import { ContainedObjects } from './constants';
 
 export async function startApplication(port: number) { 
     useContainer(Container);
-    Container.set("jwtSecret", await getJwtSecret())
+    Container.set(ContainedObjects.jwtSecret, await getJwtSecret())
     const app = createKoaServer({
         cors: true,
         controllers: [ __dirname + '/controllers/*.js' ],

@@ -1,17 +1,17 @@
 import * as jwt from 'jsonwebtoken';
-import { UserModel, User } from '../entities/User';
+import { User } from '../entities/User';
 import { JwtPayload } from '../../auth';
 import { IUser } from '@chat/shared';
 import { Service, Inject } from 'typedi';
+import { ContainedObjects } from '../../constants';
 
 @Service()
 export class UserRepository {
-    readonly model = UserModel;
-    readonly jwtSecret: string;
+    @Inject(ContainedObjects.UserModel)
+    readonly model;
 
-    constructor(@Inject('jwtSecret')jwtSecret: string) {
-        this.jwtSecret = jwtSecret;
-    }
+    constructor(@Inject(ContainedObjects.jwtSecret) private readonly jwtSecret: string) {
+}
 
     async create(username: string, password: string) {
         return await this.model.create(new User(username, password));

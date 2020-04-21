@@ -7,8 +7,8 @@ import { getJwtSecret } from '../auth';
 @JsonController('/users')
 export class UsersController {
 
-    constructor(private readonly userRepo: UserRepository)
-    { }
+    constructor(private readonly userRepo: UserRepository){ 
+    }
 
     @Get('/get')
     @OnUndefined(404)
