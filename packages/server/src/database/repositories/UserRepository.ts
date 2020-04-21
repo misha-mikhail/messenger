@@ -3,15 +3,15 @@ import { User } from '../entities/User';
 import { JwtPayload } from '../../auth';
 import { IUser } from '@chat/shared';
 import { Service, Inject } from 'typedi';
-import { ContainedObjects } from '../../constants';
+import { ContainerKeys } from '../../constants';
 
 @Service()
 export class UserRepository {
-    @Inject(ContainedObjects.UserModel)
-    readonly model;
 
-    constructor(@Inject(ContainedObjects.jwtSecret) private readonly jwtSecret: string) {
-}
+
+    constructor(@Inject(ContainerKeys.jwtSecret) private readonly jwtSecret: string,
+                @Inject(ContainerKeys.UserModel) private readonly model) {
+    }
 
     async create(username: string, password: string) {
         return await this.model.create(new User(username, password));

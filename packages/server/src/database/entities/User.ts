@@ -3,7 +3,7 @@ import { prop, arrayProp, Ref, getModelForClass } from '@typegoose/typegoose';
 import { Conversation } from '.';
 import * as crypto from 'crypto';
 import Container from "typedi";
-import { ContainedObjects } from "../../constants";
+import { ContainerKeys } from "../../constants";
 
 export class User { // implements IUser
     constructor(username: string, password: string) {
@@ -36,4 +36,4 @@ export class User { // implements IUser
 }
 
 export const UserModel = getModelForClass(User);
-Container.set(ContainedObjects.UserModel, UserModel);
+Container.set(ContainerKeys.UserModel, UserModel);
