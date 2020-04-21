@@ -8,11 +8,12 @@
     ],
     "scripts": {
         "start": "node dist",
+
         "bs": "npm run build && npm run start",
+
         "build": "npm run clean && npm run compile",
         "clean": "rimraf dist",
-        "compile": "tsc -p tsconfig.build.json",
-        "prepublishOnly": "npm run build"
+        "compile": "tsc -p tsconfig.build.json"
     },
     "dependencies": {
         "@chat/shared": "^1.0.0",

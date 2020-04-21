@@ -9,8 +9,7 @@
     "scripts": {
         "build": "npm run clean && npm run compile",
         "clean": "rimraf dist",
-        "compile": "tsc -p tsconfig.build.json",
-        "prepublishOnly": "npm run build"
+        "compile": "tsc -p tsconfig.build.json"
     },
     "dependencies": {},
     "devDependencies": {
