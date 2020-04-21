@@ -1,29 +1,26 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js build
-
+name: Node.js tests
 on:
-  push:
-    branches: [ master, fix-npm-scripts ]
-  pull_request:
-    branches: [ master, fix-npm-scripts ]
+    pull_request:
+        branches: [master]
 
 jobs:
-  build:
+    build-all:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [10.x]
 
-    strategy:
-      matrix:
-        node-version: [10.x]
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm run setup
-    - run: npm run build
-      env:
-        CI: false
+            - run: npm run setup
+            - run: npm run build
+              env:
+                  CI: false
