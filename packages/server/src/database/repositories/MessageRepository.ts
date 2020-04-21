@@ -9,7 +9,7 @@ import { ContainerKeys } from "../../constants";
 @Service()
 export default class MessageRepository { //implements IAbstractRepository<Message> {
     
-    constructor(@Inject(ContainerKeys.MessageModel) private readonly model) {
+    constructor(@Inject(ContainerKeys.MessageModel) private readonly model: typeof MessageModel.prototype) {
     }
 
     sendMessage(from: User, to: Conversation, text: string) {

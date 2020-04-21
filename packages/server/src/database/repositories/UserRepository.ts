@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { User } from '../entities/User';
+import { User, UserModel } from '../entities/User';
 import { JwtPayload } from '../../auth';
 import { IUser } from '@chat/shared';
 import { Service, Inject } from 'typedi';
@@ -10,7 +10,7 @@ export class UserRepository {
 
 
     constructor(@Inject(ContainerKeys.jwtSecret) private readonly jwtSecret: string,
-                @Inject(ContainerKeys.UserModel) private readonly model) {
+                @Inject(ContainerKeys.UserModel) private readonly model: typeof UserModel.prototype) {
     }
 
     async create(username: string, password: string) {
