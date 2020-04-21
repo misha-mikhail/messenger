@@ -9,8 +9,9 @@ import { ContainerKeys } from '../../constants';
 export class UserRepository {
 
 
-    constructor(@Inject(ContainerKeys.jwtSecret) private readonly jwtSecret: string,
-                @Inject(ContainerKeys.UserModel) private readonly model: typeof UserModel.prototype) {
+    constructor(
+        @Inject(ContainerKeys.jwtSecret) private readonly jwtSecret: string,
+        @Inject(ContainerKeys.UserModel) private readonly model: typeof UserModel.prototype) {
     }
 
     async create(username: string, password: string) {

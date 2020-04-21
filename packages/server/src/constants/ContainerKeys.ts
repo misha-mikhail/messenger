@@ -1,5 +1,6 @@
 export enum ContainerKeys {
     jwtSecret = 'jwtSecret',
     UserModel = 'UserModel',
-    MessageModel = 'MessageModel'
+    MessageModel = 'MessageModel',
+    ConversationModel = 'ConversationModel'
 }
