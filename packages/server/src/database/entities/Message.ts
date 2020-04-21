@@ -1,6 +1,8 @@
 import { prop, Ref, getModelForClass } from '@typegoose/typegoose';
 import { User, Conversation } from '.';
 import { IMessage } from '@chat/shared';
+import Container from 'typedi';
+import { ContainerKeys } from '../../constants';
 
 export class Message { // implements IMessage
     constructor(sender: User, toConversation: Conversation, text: string) {
@@ -25,7 +27,7 @@ export class Message { // implements IMessage
 }
 
 export const MessageModel = getModelForClass(Message);
-
+Container.set(ContainerKeys.MessageModel,MessageModel);
 // {
 //     existingMongoose: mongoose,
 //     schemaOptions: { collection: 'Message' },
