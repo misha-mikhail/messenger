@@ -9,11 +9,12 @@
 # Get started
 
 0. [Install Node.js (ver >= 10.0.0)](https://nodejs.org/).
-1. Copy and paste the appSettings.template.json file contents into a new appSettings.json in the same folder.\
+1. [Install MongoDB](https://www.mongodb.com/download-center/community)
+2. Copy and paste the appSettings.template.json file contents into a new appSettings.json in the same folder.\
     Optionally, you can edit some of the settings.\
     Read more details on configuration files [here](docs/configuration-files.md).
-2. `npm run setup`
-3. `npm run dev:both`
+3. `npm run setup`
+4. `npm run dev:both`
 
 # Как всё устроено
 
