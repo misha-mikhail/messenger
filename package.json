@@ -11,7 +11,7 @@
         "bs:server": "npm run --prefix packages/server bs",
 
         "rs:start": "npm run --prefix packages/web rs:start",
-
+        
         "clean": "lerna run clean",
         "build": "lerna run build"
     },
