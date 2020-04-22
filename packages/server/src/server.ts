@@ -3,13 +3,14 @@ import { getJwtSecret } from './auth';
 import { UserRepository } from './database/repositories';
 import {Container} from "typedi";
 import { ContainerKeys } from './constants';
-import * as KoaLogger from 'koa-logger';
+import 'reflect-metadata';
 
 export async function startApplication(port: number) { 
     useContainer(Container);
     Container.set(ContainerKeys.jwtSecret, await getJwtSecret());
 
     const app = createKoaServer({
+        middlewares: [ __dirname + '/middlewares/*.js'],
         cors: true,
         controllers: [ __dirname + '/controllers/*.js' ],
         authorizationChecker: async (action: Action, _roles: string[]) => {
@@ -23,7 +24,8 @@ export async function startApplication(port: number) {
             return userRepo.findUserByToken(token);
         },
     });
-    app.use(KoaLogger());
+
+
     app.listen(port);
 
     console.log(`Listening: http://localhost:${port}/`);
