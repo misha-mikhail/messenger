@@ -3,6 +3,7 @@ import { getJwtSecret } from './auth';
 import { UserRepository } from './database/repositories';
 import {Container} from "typedi";
 import { ContainerKeys } from './constants';
+import * as KoaLogger from 'koa-logger';
 
 export async function startApplication(port: number) { 
     useContainer(Container);
@@ -22,7 +23,7 @@ export async function startApplication(port: number) {
             return userRepo.findUserByToken(token);
         },
     });
-
+    app.use(KoaLogger());
     app.listen(port);
 
     console.log(`Listening: http://localhost:${port}/`);
