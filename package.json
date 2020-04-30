@@ -5,7 +5,7 @@
         "setup": "npm install && npm run bootstrap",
         "bootstrap": "lerna bootstrap --no-ci",
 
-        "dev:both": "concurrently --kill-others \"npm:rs:start\" \"npm:start:server\"",
+        "dev:both": "concurrently --kill-others \"npm:rs:start\" \"npm:watch:server\"",
 
         "start:server": "npm run --prefix packages/server start",
         "watch:server": "npm run --prefix packages/server watch",
