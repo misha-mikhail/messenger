@@ -4,23 +4,16 @@
     "configurations": [
         {
             "type": "node",
-            "request": "launch",
-            "name": "Launch Server",
-            "runtimeExecutable": "C:/Program Files/nodejs/npm",
-            "runtimeArgs": [
-                "run",
-                "start:server",
-            ],
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Build and Launch Server",
-            "runtimeExecutable": "C:/Program Files/nodejs/npm",
-            "runtimeArgs": [
-                "run",
-                "bsdebug:server",
-            ],
+            "request": "attach",
+            "name": "Server: Nodemon debug",
+            "processId": "${command:PickProcess}",
+            "restart": true,
+            "protocol": "inspector",
+            "skipFiles": [
+                "<node_internals>/**",
+                "node_modules/**",
+                "packages/server/node_modules/**",
+            ]
         },
     ]
 }
