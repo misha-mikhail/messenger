@@ -18,4 +18,4 @@ export class Conversation { // implements IConversation
 }
 
 export const ConversationModel = getModelForClass(Conversation);
-Container.set(ContainerKeys.ConversationModel,ConversationModel)
+Container.set(ContainerKeys.ConversationModel, ConversationModel)

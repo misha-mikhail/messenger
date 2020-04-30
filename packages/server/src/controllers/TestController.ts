@@ -7,8 +7,8 @@ export class TestController {
 
     @Get('/auth')
     @Authorized()
-    async testAuthorized(@CurrentUser() currentUser: User) {
-        return 'Your username is: ' + currentUser.Username;
+    async testAuthorized(@CurrentUser() currentUser?: User) {
+        return 'Your username is: ' + currentUser?.Username;
     }
 
     @Get('/init')
