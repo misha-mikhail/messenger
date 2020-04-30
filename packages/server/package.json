@@ -8,7 +8,7 @@
     ],
     "scripts": {
         "start": "ts-node src/index.ts",
-        "watch": "nodemon ./src/index.ts",
+        "watch": "nodemon --exec ts-node ./src/index.ts",
 
         "debug": "nodemon -e ts,json",
         "build": "rimraf dist && tsc -p tsconfig.build.json"
@@ -26,6 +26,7 @@
         "kcors": "^2.2.2",
         "koa": "^2.11.0",
         "koa-bodyparser": "^4.2.1",
+        "koa-logger-middleware": "^1.0.0",
         "koa-multer": "^1.0.2",
         "koa-router": "^8.0.0-alpha.1",
         "mongodb": "^3.5.4",
@@ -34,7 +35,8 @@
         "reflect-metadata": "^0.1.13",
         "routing-controllers": "^0.8.1-alpha.2",
         "ts-node": "^8.9.1",
-        "typedi": "^0.8.0"
+        "typedi": "^0.8.0",
+        "winston": "^3.2.1"
     },
     "devDependencies": {
         "@types/jsonwebtoken": "^8.3.8",

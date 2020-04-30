@@ -10,6 +10,10 @@ export async function startApplication(port: number) {
 
     const app = createKoaServer({
         cors: true,
+        middlewares: [
+            __dirname + '/middlewares/*.js',
+            __dirname + '/middlewares/*.ts', // for ts-node
+        ],
         controllers: [
             __dirname + '/controllers/*.js',
             __dirname + '/controllers/*.ts', // for ts-node
@@ -25,6 +29,7 @@ export async function startApplication(port: number) {
             return userRepo.findUserByToken(token);
         },
     });
+
 
     app.listen(port);
 
