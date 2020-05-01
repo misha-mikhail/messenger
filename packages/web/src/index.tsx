@@ -4,7 +4,7 @@ import './index.css';
 import { App } from './App';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
-import { baseUrl } from './api/baseUrl';
+import { baseUrl } from './api';
 import { Provider } from 'react-redux';
 import { store } from './state';
 

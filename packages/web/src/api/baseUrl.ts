@@ -1,2 +1,1 @@
-export const baseUrl = 'http://localhost:3001';
-// TODO: Хардкод. Брать откуда-нибудь.
+export const baseUrl = process.env.REACT_APP_BASE_URL ?? 'http://localhost:3001';
