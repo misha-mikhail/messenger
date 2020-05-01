@@ -11,7 +11,7 @@ export class UserRepository {
 
     constructor(
         @Inject(ContainerKeys.jwtSecret) private readonly jwtSecret: string,
-        @Inject(ContainerKeys.UserModel) private readonly model: typeof UserModel.prototype) {
+        @Inject(ContainerKeys.UserModel) private readonly model: typeof UserModel) {
     }
 
     async create(username: string, password: string) {

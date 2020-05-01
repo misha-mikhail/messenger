@@ -1,16 +1,14 @@
 import { User, Message } from "../entities";
-import { IAbstractRepository } from './AbstractRepository';
 import { MessageModel } from '../entities/Message';
 import { Conversation } from '../entities/Conversation';
 import { Service, Inject } from "typedi";
 import { ContainerKeys } from "../../constants";
 
-// unused
 @Service()
-export default class MessageRepository { //implements IAbstractRepository<Message> {
-    
+export default class MessageRepository {
+
     constructor(
-        @Inject(ContainerKeys.MessageModel) private readonly model: typeof MessageModel.prototype) {
+        @Inject(ContainerKeys.MessageModel) private readonly model: typeof MessageModel) {
     }
 
     sendMessage(from: User, to: Conversation, text: string) {
