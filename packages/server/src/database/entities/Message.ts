@@ -27,8 +27,4 @@ export class Message { // implements IMessage
 }
 
 export const MessageModel = getModelForClass(Message);
-Container.set(ContainerKeys.MessageModel,MessageModel);
-// {
-//     existingMongoose: mongoose,
-//     schemaOptions: { collection: 'Message' },
-// })
+Container.set(ContainerKeys.MessageModel, MessageModel);

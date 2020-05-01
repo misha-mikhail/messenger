@@ -5,19 +5,21 @@
         "setup": "npm install && npm run bootstrap",
         "bootstrap": "lerna bootstrap --no-ci",
 
-        "dev:both": "concurrently --kill-others \"npm:rs:start\" \"npm:bs:server\"",
+        "dev:both": "concurrently --kill-others \"npm:rs:start\" \"npm:watch:server\"",
 
         "start:server": "npm run --prefix packages/server start",
-        "bs:server": "npm run --prefix packages/server bs",
+        "watch:server": "npm run --prefix packages/server watch",
+        "debug:server": "npm run --prefix packages/server debug",
 
         "rs:start": "npm run --prefix packages/web rs:start",
-        
+
         "clean": "lerna run clean",
         "build": "lerna run build"
     },
     "devDependencies": {
         "concurrently": "^5.1.0",
         "lerna": "~3.14.0",
+        "ts-node": "^8.9.1",
         "typescript": "3.8.3"
     },
     "dependencies": {

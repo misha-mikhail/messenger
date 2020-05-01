@@ -14,7 +14,21 @@
     Optionally, you can edit some of the settings.\
     Read more details on configuration files [here](docs/configuration-files.md).
 3. `npm run setup`
-4. `npm run dev:both`
+
+## Running
+
+`npm run dev:both` to run the server and the web part concurrently (both are run in the watch-mode).
+
+`npm run start:server` to start the server.\
+`npm run rs:start` to start the `@chat/web`.
+
+`npm run build` to build every package in this monorepo.
+
+## Development
+`npm run watch:server` will rebuild and restart the `@chat/server` project on every .ts or .json file change.
+
+["Debugging @chat/server via VS Code" guide](docs/debug.md)
+
 
 # Как всё устроено
 

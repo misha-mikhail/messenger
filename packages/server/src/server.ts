@@ -1,18 +1,23 @@
 import { createKoaServer, Action, useContainer } from 'routing-controllers';
 import { getJwtSecret } from './auth';
 import { UserRepository } from './database/repositories';
-import {Container} from "typedi";
+import { Container } from "typedi";
 import { ContainerKeys } from './constants';
-import 'reflect-metadata';
 
-export async function startApplication(port: number) { 
+export async function startApplication(port: number) {
     useContainer(Container);
     Container.set(ContainerKeys.jwtSecret, await getJwtSecret());
 
     const app = createKoaServer({
-        middlewares: [ __dirname + '/middlewares/*.js'],
         cors: true,
-        controllers: [ __dirname + '/controllers/*.js' ],
+        middlewares: [
+            __dirname + '/middlewares/*.js',
+            __dirname + '/middlewares/*.ts', // for ts-node
+        ],
+        controllers: [
+            __dirname + '/controllers/*.js',
+            __dirname + '/controllers/*.ts', // for ts-node
+        ],
         authorizationChecker: async (action: Action, _roles: string[]) => {
             const userRepo = Container.get(UserRepository);
             const token = action.request.headers['authorization'];
