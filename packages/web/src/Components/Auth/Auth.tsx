@@ -26,7 +26,7 @@ const FormContainer = styled.section`
     padding-bottom: 28px; /* Я так вижу. */
 `;
 
-const Submit = styled(FormItem)`
+export const Submit = styled(FormItem)`
     &:not(:first-child), :first-child { /* Злой оверрайд стилей из FormItem. */
         margin-top: 20px;
     }
@@ -67,7 +67,7 @@ const extractErrorsFromFailedResponse = (failedResp: any) => {
     return newErrors;
 };
 
-let AuthComponent = (props: { dispatch: Function }) => {
+export const AuthComponent = (props: { dispatch: Function }) => {
     const [formState, setFormState] = useState(AuthFormState.Login);
     const [userCredentials, setUserCredentials] = useState<IUserCredentials>({Username: '', Password: ''});
     const [errors, setErrors] = useState<AuthFormErrors>({});
