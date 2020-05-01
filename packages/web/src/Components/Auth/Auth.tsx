@@ -98,7 +98,7 @@ let AuthComponent = (props: { dispatch: Function }) => {
                     setCredentials={setUserCredentials} />
 
                 <Submit errorMessage={errors.common} onClick={submitForm}>
-                    {formState === AuthFormState.Login ? 'Let' : 'Register'} me in!
+                    {formState === AuthFormState.Login ? 'Let me in!' : 'Register me!'}
                 </Submit>
             </FormContainer>
         </AuthContainer>
