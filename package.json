@@ -3,14 +3,17 @@
     "private": true,
     "scripts": {
         "setup": "npm install && npm run bootstrap",
+        "bootstrap": "lerna bootstrap --no-ci",
+
+        "dev:both": "concurrently --kill-others \"npm:rs:start\" \"npm:bs:server\"",
+
         "start:server": "npm run --prefix packages/server start",
         "bs:server": "npm run --prefix packages/server bs",
+
         "rs:start": "npm run --prefix packages/web rs:start",
-        "dev:both": "concurrently --kill-others \"npm:rs:start\" \"npm:bs:server\"",
-        "bootstrap": "lerna bootstrap",
+        
         "clean": "lerna run clean",
-        "build": "lerna run build",
-        "pub": "lerna publish"
+        "build": "lerna run build"
     },
     "devDependencies": {
         "concurrently": "^5.1.0",

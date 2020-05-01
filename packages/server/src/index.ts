@@ -5,9 +5,5 @@ import { startApplication } from './server';
 
 (async () => {
     await connectToDatabase();
-    const app = startApplication(3001);
-
-    process.on('SIGTERM', () => {
-        app.close();
-    });
+    const app = await startApplication(3001);
 })();

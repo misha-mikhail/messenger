@@ -10,15 +10,14 @@
     "extends": "react-app"
   },
   "scripts": {
-    "start": "node dist",
-    "build": "npm run clean && npm run compile",
+    "start-built": "npx serve -s dist",
+    "build": "npm run rs:build && npm run clean && mv build dist || move build dist",
     "clean": "rimraf dist",
-    "compile": "tsc -p tsconfig.build.json",
+
     "rs:start": "react-scripts start",
     "rs:build": "react-scripts build",
     "rs:test": "react-scripts test",
-    "rs:eject": "react-scripts eject",
-    "prepublishOnly": "npm run build"
+    "rs:eject": "react-scripts eject"
   },
   "dependencies": {
     "@chat/shared": "^1.0.0",
