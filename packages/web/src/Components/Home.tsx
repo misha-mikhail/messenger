@@ -1,18 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { AuthState } from '../state';
 
-export function Home() {
+const HomeComponent = (props: any)  => {
     const [data, setData] = useState(null);
 
+    const getAndSetData = async () => {
+        const resp = await axios.get('/messages/get');
+        setData(resp.data);
+    };
+
     useEffect(() => {
-        fetch('http://localhost:3001/messages/get').then(f => f.json()).then(j => setData(j))
+        getAndSetData();
     }, []);
 
     return (
         <div>
-            <h2>Home</h2>
+            <h2>Debug</h2>
             <div>
-                {JSON.stringify(data)}
+                GET '/messages/get': {JSON.stringify(data)}
+            </div>
+            <div>
+                State: &nbsp;
+                <code>
+                    {props?.state && JSON.stringify(props.state)}
+                </code>
             </div>
         </div>
     );
 }
+
+const mapStateToProps = (state: AuthState) => ({ state });
+export const Home = connect(mapStateToProps)(HomeComponent);

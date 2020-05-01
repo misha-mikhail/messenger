@@ -4,7 +4,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "lib": [
       "dom",
       "dom.iterable",

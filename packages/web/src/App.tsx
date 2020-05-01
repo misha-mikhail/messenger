@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
 import { Home } from "./Components/Home";
-import { Auth } from './Components/Auth/Auth';
+import { Auth } from './Components/Auth';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link,
 } from "react-router-dom";
+import { connect } from 'react-redux';
 
-export default function App() {
-    const isLoggedIn = false;
+function AppComponent(props?: { state?: any }) {
+    const isLoggedIn = !!props?.state?.token;
 
     return (
         <Router>
@@ -19,7 +20,7 @@ export default function App() {
                         <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/auth">Auth</Link>
+                        <Link to="/auth">Sign in window</Link>
                     </li>
                 </ul>
 
@@ -43,3 +44,5 @@ export default function App() {
     );
 }
 
+export const App = connect((state) => ({ state }))(AppComponent);
+export default App;
