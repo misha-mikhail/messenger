@@ -14,6 +14,10 @@ import { store } from './state';
 axios.defaults.baseURL = baseUrl;
 axios.defaults.headers.common['Authorization'] = store.getState()?.token;
 
+if (process.env.NODE_ENV === 'development') {
+    (window as any).axios = axios;
+}
+
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
