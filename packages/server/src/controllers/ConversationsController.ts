@@ -1,4 +1,4 @@
-import { JsonController, Get, CurrentUser } from 'routing-controllers';
+import { JsonController, Get, CurrentUser, Authorized } from 'routing-controllers';
 import { ConversationModel } from '../database/entities/Conversation';
 import { User } from '../database/entities';
 import { ContainerKeys } from '../constants';
@@ -11,7 +11,7 @@ export class ConversationsController {
     }
 
     @Get('/get')
-    getConversations(@CurrentUser() currentUser: User) {
+    getConversations(@CurrentUser({ required: true }) currentUser: User) {
         console.log('currentUser', currentUser);
 
         const convs = this.convsModel.find({
